@@ -1,6 +1,7 @@
 from machine import Pin, ADC
 import time
 
+# Pinos de acordo com o diagram.json deste projeto
 SENSOR_PIN = 35
 BOTAO_PIN = 13
 
@@ -29,8 +30,9 @@ class ContadorProducao:
         self.instante_bloqueio = None
         self.microparada_avisada = False
 
-        self.botao_nivel_anterior = 1
-        self.botao_nivel_estavel = 1
+        estado_inicial_botao = botao.value()
+        self.botao_nivel_anterior = estado_inicial_botao
+        self.botao_nivel_estavel = estado_inicial_botao
         self.botao_instante_borda = time.ticks_ms()
 
     def _leitura_sensor(self):
